@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+    .dashboard {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .card-box {
+        background: rgba(255,255,255,0.05);
+        padding: 20px;
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+    }
+
+    table {
+        color: white;
+    }
+
+    th {
+        background: #ff4b2b;
+    }
+</style>
+
+<div class="dashboard">
+    <h2>Welcome, {{ session['user_name'] }} 👋</h2>
+    <p>Your IPL Bookings</p>
+</div>
+
+<div class="card-box">
+
+    {% if bookings %}
+    <table class="table table-bordered text-center">
+        <thead>
+            <tr>
+                <th>Match</th>
+                <th>Stadium</th>
+                <th>Seats</th>
+                <th>Total Price</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for b in bookings %}
+            <tr>
+                <td>{{ b[0] }} vs {{ b[1] }}</td>
+                <td>{{ b[2] }}</td>
+                <td>{{ b[3] }}</td>
+                <td>₹{{ b[4] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>No bookings yet.</p>
+    {% endif %}
+
+</div>
+
+<div class="text-center mt-4">
+    <a href="/matches" class="btn btn-primary">Browse Matches</a>
+</div>
+
+{% endblock %}

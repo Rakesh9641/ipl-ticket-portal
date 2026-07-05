@@ -1,0 +1,194 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+.register-card {
+    max-width: 420px;
+    margin: auto;
+    padding: 30px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+}
+
+/* FIX INPUT GROUP ALIGNMENT */
+.input-group {
+    align-items: center;
+    background: rgba(255,255,255,0.05);
+    border-radius: 10px;
+    padding: 5px;
+}
+
+/* ICON STYLE */
+.input-group-text {
+    background: transparent;
+    border: none;
+    color: #ff4b2b;
+    font-size: 16px;
+}
+
+/* INPUT FIELD */
+.form-control {
+    background: transparent;
+    border: none;
+    color: white;
+    height: 45px;
+}
+
+.form-control::placeholder {
+    color: #ccc;
+}
+
+/* REMOVE BLUE BORDER */
+.form-control:focus {
+    box-shadow: none;
+}
+
+/* ERROR TEXT */
+.error {
+    font-size: 12px;
+    color: #ff6b6b;
+    margin-top: 5px;
+    display: none;
+}
+
+/* BUTTON */
+.btn-register {
+    border-radius: 25px;
+    background: linear-gradient(45deg, #ff416c, #ff4b2b);
+    border: none;
+    padding: 10px;
+    transition: 0.3s;
+}
+
+.btn-register:hover {
+    transform: scale(1.05);
+}
+
+/* TOGGLE ICON FIX */
+.toggle-icon {
+    cursor: pointer;
+}
+</style>
+
+<div class="register-card">
+
+    <div class="text-center mb-4">
+        <i class="fas fa-user-plus icon"></i>
+        <h3>Create Account</h3>
+        <p class="text-muted">Join IPL Booking</p>
+    </div>
+
+    <form method="POST" onsubmit="return validateForm()">
+
+        <!-- NAME -->
+        <div class="mb-3">
+            <div class="input-group">
+                <span class="input-group-text">
+                    <i class="fas fa-user"></i>
+                </span>
+                <input type="text" id="name" name="name" class="form-control" placeholder="Full Name">
+            </div>
+            <div id="nameError" class="error">Enter valid name (min 3 letters)</div>
+        </div>
+
+        <!-- EMAIL -->
+        <div class="mb-3">
+            <div class="input-group">
+                <span class="input-group-text">
+                    <i class="fas fa-envelope"></i>
+                </span>
+                <input type="email" id="email" name="email" class="form-control" placeholder="Email">
+            </div>
+            <div id="emailError" class="error">Enter valid email</div>
+        </div>
+
+        <!-- PASSWORD -->
+        <div class="mb-3">
+            <div class="input-group">
+                <span class="input-group-text">
+                    <i class="fas fa-lock"></i>
+                </span>
+
+                <input type="password" id="password" name="password"
+                       class="form-control" placeholder="Password">
+
+                <span class="input-group-text toggle-icon" onclick="togglePassword()">
+                    <i class="fas fa-eye" id="toggleIcon"></i>
+                </span>
+            </div>
+
+            <div id="passwordError" class="error">
+                Password must be 6+ chars, include number & uppercase
+            </div>
+        </div>
+
+        <button class="btn btn-register w-100 mt-3">Register</button>
+
+    </form>
+
+    <p class="text-center mt-3">
+        Already have an account?
+        <a href="/login" class="text-warning">Login</a>
+    </p>
+
+</div>
+
+<!-- ✅ VALIDATION -->
+<script>
+function validateForm() {
+    let name = document.getElementById("name").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let password = document.getElementById("password").value;
+
+    let valid = true;
+
+    // NAME
+    if (name.length < 3 || !/^[A-Za-z ]+$/.test(name)) {
+        document.getElementById("nameError").style.display = "block";
+        valid = false;
+    } else {
+        document.getElementById("nameError").style.display = "none";
+    }
+
+    // EMAIL
+    let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    if (!email.match(emailPattern)) {
+        document.getElementById("emailError").style.display = "block";
+        valid = false;
+    } else {
+        document.getElementById("emailError").style.display = "none";
+    }
+
+    // PASSWORD
+    let passPattern = /^(?=.*[A-Z])(?=.*\d).{6,}$/;
+    if (!password.match(passPattern)) {
+        document.getElementById("passwordError").style.display = "block";
+        valid = false;
+    } else {
+        document.getElementById("passwordError").style.display = "none";
+    }
+
+    return valid;
+}
+</script>
+
+<!-- 👁️ TOGGLE -->
+<script>
+function togglePassword() {
+    let passwordField = document.getElementById("password");
+    let icon = document.getElementById("toggleIcon");
+
+    if (passwordField.type === "password") {
+        passwordField.type = "text";
+        icon.classList.replace("fa-eye", "fa-eye-slash");
+    } else {
+        passwordField.type = "password";
+        icon.classList.replace("fa-eye-slash", "fa-eye");
+    }
+}
+</script>
+
+{% endblock %}

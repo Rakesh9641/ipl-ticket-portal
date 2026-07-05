@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+    .match-card {
+        background: rgba(255,255,255,0.05);
+        border-radius: 15px;
+        padding: 20px;
+        text-align: center;
+        backdrop-filter: blur(10px);
+        transition: 0.3s;
+    }
+
+    .match-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    }
+
+    .team {
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .vs {
+        color: #ff4b2b;
+        font-size: 18px;
+        margin: 10px 0;
+    }
+</style>
+
+<h2 class="text-center mb-4">🏏 Available Matches</h2>
+
+<div class="row g-4">
+
+    {% if matches %}
+        {% for match in matches %}
+        <div class="col-md-4">
+            <div class="match-card">
+
+                <div class="team">{{ match[1] }}</div>
+                <div class="vs">VS</div>
+                <div class="team">{{ match[2] }}</div>
+
+                <p class="mt-2">📍 {{ match[3] }}</p>
+                <p>📅 {{ match[4] }}</p>
+                <p>💰 ₹{{ match[5] }}</p>
+
+                <a href="/book/{{ match[0] }}" class="btn btn-primary mt-2">
+                    Book Now
+                </a>
+
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p class="text-center">No matches available</p>
+    {% endif %}
+
+</div>
+
+{% endblock %}

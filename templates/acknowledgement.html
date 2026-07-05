@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+.success-card {
+    max-width: 500px;
+    margin: auto;
+    padding: 30px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(10px);
+    text-align: center;
+}
+</style>
+
+<div class="success-card">
+
+    <h2>✅ Booking Confirmed!</h2>
+
+    <p><strong>Match:</strong> {{ match[1] }} vs {{ match[2] }}</p>
+    <p><strong>Stadium:</strong> {{ match[3] }}</p>
+    <p><strong>Seats:</strong> {{ seats }}</p>
+    <p><strong>Food:</strong> {{ food }}</p>
+    <p><strong>Total Paid:</strong> ₹{{ total }}</p>
+
+    <hr>
+
+    <p>🎉 Enjoy your match!</p>
+
+    <a href="/dashboard" class="btn btn-success mt-2">Go to Dashboard</a>
+
+</div>
+
+{% endblock %}

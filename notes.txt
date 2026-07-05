@@ -1,0 +1,28 @@
+CREATE DATABASE ipl_booking;
+USE ipl_booking;
+
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    email VARCHAR(100),
+    password VARCHAR(255)
+);
+
+CREATE TABLE matches (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    team1 VARCHAR(50),
+    team2 VARCHAR(50),
+    stadium VARCHAR(100),
+    match_date DATE,
+    price INT
+);
+
+CREATE TABLE bookings (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    match_id INT,
+    seats INT,
+    total_price INT
+);
+

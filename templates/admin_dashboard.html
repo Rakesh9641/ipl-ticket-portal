@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+    .dashboard-title {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .form-card {
+        background: rgba(255,255,255,0.05);
+        padding: 25px;
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+        margin-bottom: 30px;
+    }
+
+    .table-custom {
+        background: rgba(255,255,255,0.05);
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    table {
+        color: white;
+    }
+
+    th {
+        background: #ff4b2b;
+    }
+
+    .btn-danger {
+        border-radius: 20px;
+    }
+</style>
+
+<div class="dashboard-title">
+    <h2>👨‍💼 Admin Dashboard</h2>
+    <p>Manage IPL Matches</p>
+</div>
+
+<!-- ➕ ADD MATCH -->
+<div class="form-card">
+    <h4>Add New Match</h4>
+
+    <form action="/add_match" method="POST" class="row g-3">
+
+        <div class="col-md-4">
+            <input type="text" name="team1" class="form-control" placeholder="Team 1" required>
+        </div>
+
+        <div class="col-md-4">
+            <input type="text" name="team2" class="form-control" placeholder="Team 2" required>
+        </div>
+
+        <div class="col-md-4">
+            <input type="text" name="stadium" class="form-control" placeholder="Stadium" required>
+        </div>
+
+        <div class="col-md-4">
+            <input type="date" name="date" class="form-control" required>
+        </div>
+
+        <div class="col-md-4">
+            <input type="number" name="price" class="form-control" placeholder="Ticket Price" required>
+        </div>
+
+        <div class="col-md-4">
+            <button class="btn btn-success w-100">Add Match</button>
+        </div>
+
+    </form>
+</div>
+
+<!-- 📊 MATCHES TABLE -->
+<div class="table-custom p-3">
+    <h4>All Matches</h4>
+
+    <table class="table table-bordered table-hover text-center mt-3">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Team 1</th>
+                <th>Team 2</th>
+                <th>Stadium</th>
+                <th>Date</th>
+                <th>Price</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for match in matches %}
+            <tr>
+                <td>{{ match[0] }}</td>
+                <td>{{ match[1] }}</td>
+                <td>{{ match[2] }}</td>
+                <td>{{ match[3] }}</td>
+                <td>{{ match[4] }}</td>
+                <td>₹{{ match[5] }}</td>
+                <td>
+                    <a href="/delete_match/{{ match[0] }}" class="btn btn-danger btn-sm">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- 🔓 LOGOUT -->
+<div class="text-center mt-4">
+    <a href="/admin/logout" class="btn btn-warning">Logout</a>
+</div>
+
+{% endblock %}

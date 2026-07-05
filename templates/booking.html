@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+.booking-card {
+    max-width: 700px;
+    margin: auto;
+    padding: 25px;
+    border-radius: 15px;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(10px);
+    text-align: center;
+}
+
+/* SEAT GRID */
+.seat-grid {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.seat {
+    padding: 10px;
+    border-radius: 8px;
+    background: #444;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.seat:hover {
+    background: #666;
+}
+
+.seat.selected {
+    background: #28a745;
+}
+
+.seat.booked {
+    background: red;
+    cursor: not-allowed;
+}
+
+.screen {
+    background: #ccc;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    color: black;
+}
+</style>
+
+<div class="booking-card">
+
+    <h3>🎟️ Select Seats</h3>
+
+    <p>
+        {{ match[1] }} vs {{ match[2] }} <br>
+        📍 {{ match[3] }} | 📅 {{ match[4] }}
+    </p>
+
+    <div class="screen">SCREEN</div>
+
+    <!-- SEAT GRID -->
+    <div class="seat-grid" id="seatGrid"></div>
+
+    <p>Selected Seats: <span id="seatCount">0</span></p>
+    <p>Total Price: ₹<span id="totalPrice">0</span></p>
+
+    <form method="POST" onsubmit="return prepareSeats()">
+
+        <!-- Hidden seats input -->
+        <input type="hidden" name="seats" id="seatsInput">
+
+        <!-- FOOD -->
+        <label>Add Food 🍔</label>
+
+        <div class="form-check">
+            <input type="checkbox" name="food" value="Popcorn"> 🍿 Popcorn
+        </div>
+        <div class="form-check">
+            <input type="checkbox" name="food" value="Burger"> 🍔 Burger
+        </div>
+        <div class="form-check">
+            <input type="checkbox" name="food" value="Cold Drink"> 🥤 Drink
+        </div>
+
+        <button class="btn btn-primary w-100 mt-3">
+            Confirm Booking
+        </button>
+
+    </form>
+
+</div>
+
+<script>
+let seatGrid = document.getElementById("seatGrid");
+let seatCount = document.getElementById("seatCount");
+let totalPrice = document.getElementById("totalPrice");
+
+let pricePerSeat = {{ match[5] }};
+let selectedSeats = [];
+
+// CREATE 40 SEATS
+for (let i = 1; i <= 40; i++) {
+    let seat = document.createElement("div");
+    seat.classList.add("seat");
+    seat.innerText = i;
+
+    seat.onclick = function () {
+        if (seat.classList.contains("selected")) {
+            seat.classList.remove("selected");
+            selectedSeats = selectedSeats.filter(s => s !== i);
+        } else {
+            seat.classList.add("selected");
+            selectedSeats.push(i);
+        }
+
+        seatCount.innerText = selectedSeats.length;
+        totalPrice.innerText = selectedSeats.length * pricePerSeat;
+    };
+
+    seatGrid.appendChild(seat);
+}
+
+// SEND DATA TO BACKEND
+function prepareSeats() {
+    if (selectedSeats.length === 0) {
+        alert("Please select at least one seat");
+        return false;
+    }
+
+    document.getElementById("seatsInput").value = selectedSeats.length;
+    return true;
+}
+</script>
+
+{% endblock %}

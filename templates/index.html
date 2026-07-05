@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+    .card-custom {
+        border-radius: 20px;
+        background: rgba(255,255,255,0.05);
+        backdrop-filter: blur(10px);
+        transition: 0.3s;
+        text-align: center;
+        padding: 30px;
+    }
+
+    .card-custom:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    }
+
+    .card-icon {
+        font-size: 40px;
+        margin-bottom: 15px;
+        color: #ff4b2b;
+    }
+
+    .hero-text {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+</style>
+
+<!-- HERO -->
+<div class="hero-text">
+    <h1>🏏 Welcome to IPL Ticket Booking</h1>
+    <p>Book tickets for your favorite IPL matches quickly & easily</p>
+</div>
+
+<!-- CARDS -->
+<div class="row g-4">
+
+    <!-- VIEW MATCHES -->
+    <div class="col-md-3">
+        <div class="card-custom">
+            <div class="card-icon">
+                <i class="fas fa-ticket-alt"></i>
+            </div>
+            <h4>View Matches</h4>
+            <p>Browse all upcoming IPL matches</p>
+            <a href="/matches" class="btn btn-danger">Explore</a>
+        </div>
+    </div>
+
+    <!-- BOOK TICKETS -->
+    <div class="col-md-3">
+        <div class="card-custom">
+            <div class="card-icon">
+                <i class="fas fa-chair"></i>
+            </div>
+            <h4>Book Tickets</h4>
+            <p>Select seats and confirm booking</p>
+            <a href="/matches" class="btn btn-danger">Book Now</a>
+        </div>
+    </div>
+
+    <!-- USER ACCOUNT -->
+    <div class="col-md-3">
+        <div class="card-custom">
+            <div class="card-icon">
+                <i class="fas fa-user"></i>
+            </div>
+            <h4>Your Account</h4>
+            <p>Manage your bookings & profile</p>
+            <a href="/login" class="btn btn-danger">Login</a>
+        </div>
+    </div>
+
+    <!-- ADMIN PANEL -->
+    <div class="col-md-3">
+        <div class="card-custom">
+            <div class="card-icon">
+                <i class="fas fa-user-shield"></i>
+            </div>
+            <h4>Admin Panel</h4>
+            <p>Manage matches and bookings</p>
+            <a href="/admin" class="btn btn-warning">Admin</a>
+        </div>
+    </div>
+
+</div>
+
+<!-- EXTRA SECTION -->
+<div class="row mt-5">
+
+    <div class="col-md-6">
+        <div class="card-custom">
+            <i class="fas fa-bolt card-icon"></i>
+            <h4>Fast Booking</h4>
+            <p>Book tickets in seconds with our optimized system</p>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card-custom">
+            <i class="fas fa-shield-alt card-icon"></i>
+            <h4>Secure Payments</h4>
+            <p>Your transactions are safe and secure</p>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+    .admin-card {
+        max-width: 420px;
+        margin: 60px auto;
+        padding: 30px;
+        border-radius: 20px;
+        background: rgba(255,255,255,0.05);
+        backdrop-filter: blur(12px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+        text-align: center;
+    }
+
+    .admin-icon {
+        font-size: 45px;
+        color: #ff4b2b;
+        margin-bottom: 10px;
+    }
+
+    .form-control {
+        border-radius: 10px;
+        margin-bottom: 15px;
+    }
+
+    .btn-admin {
+        width: 100%;
+        border-radius: 25px;
+        background: linear-gradient(45deg, #ff416c, #ff4b2b);
+        border: none;
+        color: white;
+        padding: 10px;
+        transition: 0.3s;
+    }
+
+    .btn-admin:hover {
+        transform: scale(1.05);
+    }
+
+    .fade-in {
+        animation: fadeIn 1s ease-in;
+    }
+
+    @keyframes fadeIn {
+        from {opacity: 0;}
+        to {opacity: 1;}
+    }
+</style>
+
+<div class="admin-card fade-in">
+
+    <div class="admin-icon">
+        <i class="fas fa-user-shield"></i>
+    </div>
+
+    <h3 class="mb-3">Admin Login</h3>
+
+    <form method="POST">
+
+        <input type="text" name="username" class="form-control" placeholder="Admin Username" required>
+
+        <input type="password" name="password" class="form-control" placeholder="Password" required>
+
+        <button class="btn btn-admin mt-2">
+            <i class="fas fa-lock"></i> Login
+        </button>
+
+    </form>
+
+    <p class="mt-3 text-muted">
+        Authorized access only
+    </p>
+
+</div>
+
+{% endblock %}
