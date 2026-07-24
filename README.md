@@ -96,18 +96,6 @@ Through this project, I learned:
 - Authentication
 - Frontend Development
 - Git & GitHub
-
----
-
-## 📷 Screenshots
-
-Add screenshots of:
-
-- Home Page
-- Login Page
-- Booking Page
-- Dashboard
-
 ---
 
 ## 👨‍💻 Author
@@ -117,7 +105,3 @@ Add screenshots of:
 - GitHub: https://github.com/Rakesh9641
 
 ---
-
-## ⭐ Support
-
-If you found this project useful, please consider giving it a ⭐ on GitHub.
